@@ -1,0 +1,68 @@
+from flask import render_template, request, redirect, flash, session, url_for
+from app import app, mysql
+from app.user import User
+
+
+@app.route("/users/account", methods=["GET", "POST"])
+def account():
+
+    if request.method == "POST":
+        req = request.form
+        username = req.get("username")
+        password = req.get("password")
+        # valida o nome de usuário e a senha
+        user = User()
+        user_id = user.login(username, password, mysql)
+
+        if not user_id:
+            flash("Nome de usuário ou senha incorretos.")
+            return redirect(request.url)
+        else:
+            # cria uma sessão de usuário
+            session["USER_ID"] = user_id
+            return redirect(url_for("index"), code=302)
+
+    return render_template("users/account.html")
+
+
+@app.route("/users/new", methods=["GET", "POST"])
+def new_user():
+
+    if request.method == "POST":
+        req = request.form
+        username = req.get("username")
+        email = req.get("email")
+        password = req.get("password")
+        user = User()
+
+        # verifica a disponibilidade de nome e email
+        user_in_db = user.is_registered(username, email, mysql)
+        if not user_in_db:
+
+            if len(password) <= 8:
+                flash("A senha precisa ter ao menos 8 caracteres.")
+                return redirect(request.url)
+            else:
+                user_id = user.create_account(
+                    username,
+                    email,
+                    password,
+                    mysql
+                )
+                # cria uma nova sessão com o id do usuário
+                session["USER_ID"] = user_id
+                return redirect(url_for("index"), code=302)
+        else:
+            flash("Usuário já cadastrado.")
+            return render_template("index.html")
+    else:
+        return render_template("users/new.html")
+
+
+@app.route("/users/session", methods=["POST"])
+def user_session():
+
+    if request.method == "POST":
+    # remove id do usuário encerrando a sessão
+        session.pop("USER_ID", None)
+        return redirect(url_for("index"), code=302)

@@ -6,4 +6,4 @@ app.config.from_object("config.DevelopmentConfig")
 
 mysql = MySQL(app)
 
-from app.views import index, news, user
+from app.views import index, users
