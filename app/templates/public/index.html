@@ -1,0 +1,102 @@
+{% extends "public/public_template/public_template.html" %}
+
+{% block title %}
+Home
+{% endblock title %}
+
+{% block main %}
+<div class="container">
+    <div class="row pt-3">
+        <div class="col-2 pt-1">
+            <a href="/news/{{ news_list[6].title }}">
+                <button class="btn btn">Veja os detalhes</button>
+            </a>
+        </div>
+        <div class="col-8">
+            <h5 class="pt-2 ms-2">{{ news_list[6].title }}</h5>
+        </div>
+        <div class="col-2">
+            <p class="tiny-text mb-0 pt-2">{{ news_list[6].date }}</p>
+        </div>
+    </div>
+    <hr>
+    <div class="row main-news-container">  
+            <div id="news-carousel" class="carousel slide carousel-fade col-xl-9 col-lg-12 mt-1" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                    <a href="/news/{{ news_list[0].title }}">
+                        <img class="img-rounded" src="../../static/images/news/{{ news_list[0].image }}"  class="d-block w-100" alt="{{ game_list[0].label }} image">
+                    </a>
+                    <div class="carousel-caption">
+                        <a class="main-news-title content-link content-link-top" href="/news/{{ news_list[0].title }}">{{ news_list[0].label.title() }}</a>
+                        <h5 class="carousel-title pt-2">{{ news_list[0].title }}</h5>
+                    </div>
+                  </div>
+                  <div class="carousel-item">
+                    <a href="/news/{{ news_list[1].title }}">
+                        <img class="img-rounded" src="../../static/images/news/{{ news_list[1].image }}"  class="d-block w-100" alt="{{ game_list[1].label }} image">
+                    </a>
+                    <div class="carousel-caption">
+                        <a class="main-news-title content-link content-link-top" href="/news/{{ news_list[1].title }}">{{ news_list[1].label.title() }}</a>
+                        <h5 class="carousel-title pt-2">{{ news_list[1].title }}</h5>
+                    </div>
+                </div>
+                </div>
+              </div>
+        <div class="col-xl-3 col-lg-12">
+            <div class="containers-border mt-1">
+                <h4 class="text-center py-2">Últimas reviews</h4>
+                {% for game in game_list %}
+                    <div class="row mx-2 my-1 border-bottom">
+                        <div class="col-2 pt-1">
+                            <button class="btn game-score">96</button>
+                        </div>
+                        <div class="col-10">   
+                            <a class="content-link" href="/titles/{{ game.id }}">{{ game.title[0:20] }}</a>
+                            <p class="tiny-text">{{ game.platform[0:30] }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <a class="content-link pt-4" href="/news">Explorar jogos >></a>
+        </div>   
+    </div>
+    <h3 class="pt-4">Notícias</h3>
+    <hr>
+    <div class="row">
+        <div class="col-6 pt-2">
+            {% for news in news_list[2:5] %}
+                <div class="row">
+                    <div class="col-5 pt-2">
+                        <a href="/news/{{ news.title }}">
+                            <img class="img-rounded" src="../../static/images/news/{{ news.image }}" alt="{{ news.label }} image">
+                        </a>
+                    </div>
+                    <div class="col-7 pt-2">
+                        <a class="btn tiny-label" href="/search/?s={{ news.label }}">{{ news.label }}</a>
+                        <a class="content-link" href="/news/{{ news.title }}">{{ news.title }}</a>
+                        <p class="news-info pt-2">{{ news.sub }}</p>
+                    </div>
+                </div>
+            {% endfor %}
+            <a class="content-link py-4" href="/news">Todas as notícias >></a>
+        </div>
+        <div class="col-6 pt-2">
+            {% for news in news_list[5:] %}
+                <div class="row">
+                    <div class="col-5 pt-2">
+                        <a href="/news/{{ news.title }}">
+                            <img class="img-rounded" src="../../static/images/news/{{ news.image }}" alt="{{ news.label }} image">
+                        </a>
+                    </div>
+                    <div class="col-7 pt-2">
+                        <a class="btn tiny-label" href="/search/?s={{ news.label }}">{{ news.label }}</a>
+                        <a class="content-link" href="/news/{{ news.title }}">{{ news.title }}</a>
+                        <p class="news-info pt-2">{{ news.sub }}</p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock main %}

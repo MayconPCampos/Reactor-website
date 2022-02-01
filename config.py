@@ -1,9 +1,9 @@
 from dotenv import load_dotenv
 import os
 
-load_dotenv()  # loading enviroment variables
+load_dotenv()
 
-class Config:   
+class Config:
     DEBUG = False
     MYSQL_HOST = os.environ.get("MYSQL_HOST")
     MYSQL_USER = os.environ.get("MYSQL_USER")

@@ -12,57 +12,38 @@
     <link rel="stylesheet" href="/static/css/styles.css">
     <!-- icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
-    {% block style %}
-    {% endblock style %}
     <title>{% block title %}{% endblock title %}</title>
 </head>
 <body>
      <div class="top-bar container-fluid p-0">
          <div class="top-bar-container container">
-            <nav class="navbar navbar-expand-lg navbar-dark py-3">
+            <nav class="navbar navbar-expand-lg navbar-dark py-1">
                 <a class="brand-link" href="/">
                     <h2 class="site-title pe-1">Nome site</h2>
                 </a>
-                <ul class="navbar-nav ms-auto">
-                    {% if session["USER_ID"] %}
-                    <li class="nav-item pe-3">
-                        <a class="nav-link" href="">Meu perfil</a>
-                    </li>
-                    <li class="nav-item">
-                        <form action="/users/session" method="POST">
-                            <button class="nav-link" type="submit">Sair</button>
-                        </form>
-                    </li>
-                    {% else %}
-                    <li class="nav-item pe-3">
-                        <a class="nav-link" href="/users/account">Entrar</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="btn" type="submit" href="/users/new">Criar conta</a>
-                    </li>
-                    {% endif %}
-                </ul>
+                <a class="nav-link ms-auto" href="/exit">Sair</a>
             </nav>
         </div>
     </div>
+    <nav>
     <div class="explore-bar container-fluid p-0">
         <div class="explore-bar container ">
             <nav class="navbar navbar-expand-lg py-3">
                 <ul class="navbar-nav">
                     <li class="nav-item pe-3">
-                        <a class="nav-link"href="/">Home</a>
+                        <a class="nav-link"href="/">Resumo</a>
                     </li>
                     <li class="nav-item pe-3">
                         <a class="nav-link"href="">Explorar</a>
                     </li>
                     <li class="nav-item pe-3">
-                        <a class="nav-link"href="">Notícias</a>
+                        <a class="nav-link"href="/news">Postar notícia</a>
                     </li>
                     <li class="nav-item pe-3">
-                        <a class="nav-link"href="">Sobre</a>
+                        <a class="nav-link"href="">Estatísticas</a>
                     </li>
                     <li>
-                        <form class="input-group w-100" action="" method="GET">
+                        <form class="input-group w-100" action="/search/" method="GET">
                             <input class="form-control rounded-pill shadow-none border-0 me-1" type="search" name="s" placeholder="Pesquisar">
                             <button class="search-button btn rounded-pill" type="submit"><i class="bi bi-search"></i></button>
                         </form>
@@ -73,12 +54,5 @@
     </div>
    {% block main %}
    {% endblock main %}
-    <footer>
-        <div class="footer container-fluid">
-            <p class="footer-text text-center py-5">@2021 Maycon Campos</p>
-        </div>
-    </footer>
-    {% block script %}
-    {% endblock script %}
 </body>
 </html>

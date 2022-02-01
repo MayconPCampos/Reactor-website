@@ -1,0 +1,29 @@
+{% extends "public/public_template/public_template.html" %}
+
+{% block title %}
+Notícias
+{% endblock title %}
+
+{% block main %}
+<div class="container">     
+    <h3 class="pt-5 pb-4">Notícias</h2>
+    {% for news in news_list %}
+        <div class="row align-items-end">
+            <div class="col-2">
+                <a href="/news/{{ news.title }}">
+                    <img class="img-rounded" src="../../static/images/news/{{ news.image }}" alt="{{ news.label }} image">
+                </a>
+            </div>
+            <div class="col-8">
+                <a class="btn tiny-label" href="/search/?s={{ news.label }}">{{ news.label }}</a>
+                <a class="content-link" href="/news/{{ news.title }}">{{ news.title }}</a>
+                <p class="news-info pt-2">{{ news.sub }}</p>
+            </div>
+            <div class="col-2">
+                <p class="tiny-text align-text-bottom">{{ news.date }}</p>
+            </div>
+        </div>
+        <hr>
+    {% endfor %}
+</div>
+{% endblock main %}

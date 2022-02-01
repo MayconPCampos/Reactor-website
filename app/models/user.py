@@ -18,12 +18,11 @@ class User:
         return self.__username
 
 
-    def is_registered(self, username:str, email:str, mysql:object) -> bool:
-        """Realiza uma pesquisa na tabela users no 
-        banco de dados com o nome de usuário e email
-        fornecidos, retorna True caso os dados existam
-        ou False caso não existam.
-        """
+    def is_registered(self:object, username:str, email:str, mysql:object) -> bool:
+        """Realiza uma pesquisa na tabela users 
+        no banco de dados com o nome de usuário
+        e email, retorna True caso os dados existam
+        ou False caso não existam."""
         cursor = mysql.connection.cursor()
         cursor.execute(
             f'''SELECT userName, userEmail 
@@ -32,15 +31,13 @@ class User:
             OR BINARY "{email}" = BINARY userEmail '''
         )
         user_data = cursor.fetchone()
-        cursor.close()
-        
         if user_data:
             return True
         else: 
             return False
 
 
-    def get_user_info(self, mysql:object) -> tuple:
+    def get_user_info(self:object, mysql:object) -> tuple:
         """Retorna todos os dados de um usuário da tabela 
         users do banco de dados
         """
@@ -51,20 +48,18 @@ class User:
             WHERE BINARY "{self.__username}" = BINARY userName'''
         )
         user_data = cursor.fetchone()
-        cursor.close()
         return user_data
 
     
-    def create_account(self, username:str, email:str, password:str, mysql) -> int:
+    def create_account(self:object, username:str, email:str, password:str, mysql) -> int:
         """Cria uma hash com a senha fornecida pelo usuário,
         inseri os dados do novo usuário na tabela users
-        no banco de dados e retorna o id da nova conta
+        no banco de dados, e retorna o id da nova conta
         """
         self.__username = username
         self.__email = email
         self.__hash_password = generate_password_hash(password)
         
-        # registra novo usuário no banco de dados
         cursor = mysql.connection.cursor()
         cursor.execute(
             f'''INSERT INTO users (
@@ -80,23 +75,19 @@ class User:
             '''
         )
         mysql.connection.commit()
-        cursor.close()
         
-        # retorna o id do novo usuário
         user_data = self.get_user_info(mysql)
         self.__id = user_data[0]
 
         return self.__id
 
 
-    def login(self, username:str, password:str, mysql:object):
-        """Realiza uma busca na tabela users usando o nome
-        de usuário fornecido, se encontrado verifica a hash
-        do password e retorna o id caso a senha fornecida 
-        esteja correta, caso a senha seja inválida retorna
-        False. Se o nome de usuário não for encontrado na
-        busca retorna False.
-        """
+    def login(self:object, username:str, password:str, mysql:object):
+        """Realiza uma busca na tabela users através do
+        username, se encontrado valida a hash do password
+        e retorna o id caso a senha esteja correta, e caso
+        não retorna False. Se o username não for encontrado
+        na busca retorna False."""
         username = username
         password = password
         cursor = mysql.connection.cursor()
@@ -106,7 +97,6 @@ class User:
             WHERE BINARY "{username}" = BINARY userName;'''
         )
         user_data = cursor.fetchone()
-        cursor.close()
         if not user_data:
             return False
         else:
@@ -118,3 +108,12 @@ class User:
                 return self.__id
             else:
                 return False
+
+
+class Admin(User):
+
+    def __init__(self:object):
+
+        self.__id = None
+        self.__hash_password = None
+        super().__init__()

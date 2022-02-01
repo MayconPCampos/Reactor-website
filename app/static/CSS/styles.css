@@ -1,4 +1,4 @@
-/* ------ base ------ */
+/* ------ template ------ */
 
 .bi {
     color:rgb(112, 112, 112);
@@ -30,7 +30,7 @@
 
 .container {
     padding-right: 3%;
-    padding-left: 3%; 
+    padding-left: 3%;
 }
 
 .containers-border {
@@ -155,7 +155,96 @@ h4 {
     background-color:rgb(39, 39, 39);
 }
 
-/*------ login -----*/
+/* ------ game ------ */
+
+.btn-dark {
+    background-color: rgb(39, 39, 39);
+}
+
+.lenght-font {
+    color:rgb(39, 39, 39);
+    display: block;
+    font-weight: 400;
+    font-size: 1.0rem;
+    line-height: 1.1rem;
+    padding-bottom: 0.5rem; 
+    padding-top: 0.5rem;
+    text-decoration: none;
+    text-align: center;
+}
+
+.lenght-container {
+    border-radius: 8px;
+    padding: 0;
+
+}
+
+.content-font-top {
+    color: rgb(39, 39, 39);
+    font-size: 1.6rem;
+    font-weight: 600;
+    padding-bottom: 0.5rem;
+}
+
+.review-box {
+    border-radius: 8px;
+    margin: 1%;
+}
+
+.review-date {
+    color: grey;
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+.review-username {
+    color: rgb(39, 39, 39);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+/* ------ index ------ */
+
+.carousel-title {
+    color: white;   
+}
+
+.img-top {
+    max-width: 100%;
+    max-height: auto;
+    padding-top: 2%;
+}
+
+.img-rounded {
+    border-radius: 8px;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.main-news-container {
+    padding-top: 1%;
+    padding-bottom: 0%;
+}
+
+.main-news-title {
+    font-size: 1.8rem;
+    color:#138D75;
+}
+
+.news-info {
+    color: grey;
+    line-height: 1.1rem;
+}
+
+.tiny-text {
+    color:grey;
+}
+
+h6 {
+    color: grey;
+}
+
+/* ------ login ------ */
 
 .login-background {
     background-color: rgb(13, 13, 14);
@@ -203,4 +292,42 @@ h4 {
     background-color: white;
     border-color: white;
     color: rgb(39, 39, 39);
+}
+
+/* noticias */
+
+h1 {
+    color: rgb(39, 39, 39);
+    font-size: 3.3rem;
+    line-height: 95%;
+    padding-bottom: 1%;
+}
+
+h5 {
+    color: #138D75;
+}
+
+.news-text {
+    font-size: 1.2rem;
+}
+
+/* comunidade */
+
+.post {
+    color: rgb(112, 112, 112);
+    display: block;
+    font-weight: 400;
+    font-size: 1.0rem;
+    line-height: 1.1rem;
+    padding: 1%;
+}
+
+.post-username {
+    color: #138D75;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.post-username:hover {
+    color: #138D75;   
 }

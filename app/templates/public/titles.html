@@ -1,0 +1,86 @@
+{% extends "public/public_template/public_template.html" %}
+
+{% block title %}
+{{ game.title }}
+{% endblock title %}
+
+{% block main %}
+<div class="container py-5">
+    <div class="row">
+        <div class="col-3">
+            <img class="img-rounded w-100" src="../../static/images/game/{{ game.image }}" alt="">
+        </div>
+        <div class="col-4">
+            <div class="content-font-top">{{ game.title }}</div>
+            <button class="btn game-score">80</button>
+            <div class="content-font"><strong>Plataformas disponíveis:</strong><br>{{ game.platform }}</div>
+            <div class="content-font"><strong>Gênero:</strong><br>{{ game.genre }}</div>
+            <div class="content-font"><strong>Lançamento:</strong><br>{{ game.release }}</div>
+            <div class="content-font"><strong>Desenvolvedora:</strong><br>{{ game.developer }}</div>
+            <div class="content-font"><strong>Publisher:</strong><br>{{ game.publisher}}</div>
+            <button class="btn btn-sm mt-3">Nova Review</button>
+            <button class="btn btn-sm mt-3">Enviar tempo</button>
+        </div>
+        <div class="col-5">    
+            <div class="review-container  containers-border">
+                <h4 class="text-center py-2">Reviews</h4>
+                {% if game.reviews %}
+                    {% for review in game.reviews[:4] %}
+                        <div class="row border-bottom review-box">
+                            <div class="col-1 pt-1">
+                                <button class="btn game-score">80</button>
+                            </div>
+                            <div class="col-11">   
+                                <a class="review-username" href="">{{ review.username }}</a>
+                                <p class="review-date">{{ review.datetime }}</p>
+                                <p class="">{{ review.text}}</p>
+                            </div>
+                        </div>
+                    {% endfor %}
+                        <a class="content-link p-4" href="">Ver todas as reviews >></a>
+                    {% else %}
+                        <div class="row border-bottom review-box">
+                            <p  class="text-center pt-2"><strong>Este título não possui análises até o momento.</strong></p>
+                        </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container game-container mb-5">
+    <div class="lenght-container containers-border">       
+        <div class="row ps-4"> 
+            <div class="col">
+                <div class="lenght-font"><strong>Plataforma</strong></div>
+                {% for lenght in game.lenghts %}
+                    <p class="lenght-font pt-4">{{ lenght.platform }}</p>
+                {% endfor %}
+            </div>
+            <div class="col">
+                <div class= "lenght-font"><strong>História principal</strong></div>
+                {% for lenght in game.lenghts %}
+                    <p class="lenght-font pt-4 "> {{ lenght.main_history }}</p>
+                {% endfor %}
+            </div> 
+            <div class="col">
+                <div class="lenght-font"><strong>História + DLCs</strong></div>
+                    {% for lenght in game.lenghts %}
+                        <p class="lenght-font pt-4">{{ lenght.dlcs }}</p>
+                    {% endfor %}
+            </div>
+            <div class="col">
+                <div class="lenght-font"><strong>Multiplayer</strong></div>
+                    {% for lenght in game.lenghts %}
+                        <p class="lenght-font pt-4">{{ lenght.multiplayer }}</p>
+                    {% endfor %}
+            </div>
+            <div class="col">
+            <div class="lenght-font"><strong>100%</strong></div>
+                {% for lenght in game.lenghts %}
+                    <p class="lenght-font pt-4">{{ lenght.complete }}</p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock main %}
