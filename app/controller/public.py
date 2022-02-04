@@ -5,12 +5,18 @@ from app.models.news import *
 from app import app, mysql
 
 
+@app.template_filter('format_date')
+def format_date(date):
+    """Recebe e formata a data e hora formatadas"""
+    formated = date.strftime("%d %b %Y às %H:%M")
+    return formated
+
+
 @app.route("/")
 def index():
 
     game_list = fetch_recent(mysql)
     news_list = fetch_news_limited(8, mysql)
-   
     return render_template(
         "public/index.html",
         game_list=game_list,
@@ -24,7 +30,6 @@ def search():
     req = request.args
     search = req.get("s")
     results = 0
- 
     game_list = search_games(search, mysql)
     news_list = search_news(search, mysql)
 
@@ -47,7 +52,6 @@ def search():
 def game(id):
 
     game = fetch_game_page(id, mysql)
-
     return render_template(
         "public/titles.html",
          game=game
@@ -58,7 +62,6 @@ def game(id):
 def news_list():
 
     news_list = fetch_all(mysql)
-
     return render_template(
         "public/news_list.html",
         news_list=news_list
@@ -70,7 +73,6 @@ def news(title):
     
     page_news = fetch_news_page(title, mysql)
     news_list = fetch_news_limited(7, mysql)
-
     return render_template(
         "public/news.html",
         page_news=page_news,

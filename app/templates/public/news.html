@@ -1,4 +1,4 @@
-{% extends "public/public_template/public_template.html" %}
+{% extends "base_template.html" %}
 
 {% block title %}
 {{ page_news.title }}
@@ -10,7 +10,7 @@
         <div class="col-8">
             <h1>{{ page_news.title }}</h1>
             <h5>{{ page_news.sub }}</h5>
-            <p class="tiny-text" >{{ page_news.date }}</p>
+            <p class="tiny-text" >{{ page_news.date | format_date }}</p>
             <img class="img-rounded" src="../../static/images/news/{{ page_news.image }}" alt="">
             <p class="news-text py-4">{{ page_news.text }}</p>
             <h3>Você pode gostar</h3>

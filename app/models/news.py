@@ -1,4 +1,5 @@
 from app.tools import initialize_multiple
+from datetime import datetime
 
 
 class News:
@@ -7,12 +8,12 @@ class News:
 
         if news_data:
             self.id = news_data[0]
-            self.label = news_data[1]
-            self.title = news_data[2]
             self.sub = news_data[3]
             self.text = news_data[4]
-            self.image = news_data[5]
             self.date = news_data[6]
+            self.label = news_data[1]
+            self.title = news_data[2]
+            self.image = news_data[5]
             self.adm_id = news_data[7]
 
 
@@ -60,7 +61,7 @@ def fetch_news_page(title:str, mysql:object) -> list:
 
 
 def search_news(search:str, mysql:object) -> list:
-    """REaliza busca no banco de dados
+    """Realiza busca no banco de dados
     através da palavra buscada, cria e
     inicializa uma instância do o objeto
     News para cada registro encontrado"""
@@ -75,3 +76,19 @@ def search_news(search:str, mysql:object) -> list:
     if news_data:
         news_list = initialize_multiple(News, news_data)
         return news_list
+
+
+def create_news(label, title, sub, text, image_filename, mysql):
+    """Grava os dados de uma nova notícia no banco de dados"""
+    admin_id = 1
+    date = datetime.now()
+
+    cursor = mysql.connection.cursor()
+    cursor.execute(
+        f'''INSERT INTO news
+        (newsLabel, newsTitle, newsSub, newsText, newsImage, newsDate, newsAdmId)
+        VALUES
+        ("{label}", "{title}", "{sub}", "{text}", "{image_filename}", "{date}", "{admin_id}");
+        '''
+        )
+    mysql.connection.commit()

@@ -16,3 +16,4 @@ class ProductionConfig(Config):
 class DevelopmentConfig(Config):
     DEBUG = True
     SECRET_KEY = "development"
+    NEWS_IMAGES = "C:/Users/mayco/Programing/portfolio/Website Flask/app/static/images/news"

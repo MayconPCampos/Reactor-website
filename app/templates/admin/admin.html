@@ -1,7 +1,36 @@
-{% extends "admin/admin_template/admin_template.html" %}
+{% extends "base_template.html" %}
+
+{% block style %}
+    <style>
+        .form-control {
+            margin-bottom: 1%;
+        }
+    </style>
+{% endblock style %}
 
 {% block main %}
-<div class="top-content container">
-    <h1 class="m-0">admin dashboard</h1>
+<div class="container pt-5">
+    <h3>Nova notícia</h3>
+    <form class="form" action="/admin/contents/news" enctype="multipart/form-data" method="POST">
+        <input class="form-control" type="text" placeholder="Label" name="label">
+        <input class="form-control" type="text" placeholder="Título" name="title">
+        <input class="form-control" type="text" placeholder="Subtítulo" name="sub">
+        <textarea class="form-control" name="text" id="" cols="30" rows="5" placeholder="Texto..."></textarea>
+        <label>Imagem</label>
+        <input type="file" class="custom-file-input" name="image"><br>
+        <button class="btn btn-success mt-3 mb-5" type="submit">Postar notícia</button>
+    </form>
+    <hr>
+    <h3 class="pt-5">Adicionar título</h3>
+    <form class="form pb-5" action="">
+        <input class="form-control" type="text" placeholder="Título" name="title">
+        <input class="form-control" type="text" placeholder="Plataforma (separar por virgulas)" name="platform">
+        <input class="form-control" type="text" placeholder="Genêro (separar por virgulas)" name="genre">
+        <input class="form-control" type="text" placeholder="Desenvolvedora" name="developer">
+        <input class="form-control" type="text" placeholder="Publisher" name="publisher">
+        <label>Imagem</label>
+        <input type="file" class="custom-file-input" name="image"><br>
+        <button class="btn btn-success mt-3" type="submit">Adicionar jogo</button>
+    </form>
 </div>
 {% endblock main %}

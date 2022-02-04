@@ -63,7 +63,7 @@ def fetch_recent(mysql:object) -> list:
 
 def search_games(search:str, mysql:object) -> list:
     """Realiza uma busca e retorna os jogos
-    os quais contem a palavra buscada no titulo"""
+    os quais contem a palavra procurada no titulo"""
     cursor = mysql.connection.cursor()
     cursor.execute(
         f'''SELECT *

@@ -1,4 +1,4 @@
-{% extends "public/public_template/public_template.html" %}
+{% extends "base_template.html" %}
 
 {% block title %}
 Home
@@ -16,7 +16,7 @@ Home
             <h5 class="pt-2 ms-2">{{ news_list[6].title }}</h5>
         </div>
         <div class="col-2">
-            <p class="tiny-text mb-0 pt-2">{{ news_list[6].date }}</p>
+            <p class="tiny-text mb-0 pt-2">{{ news_list[6].date | format_date}}</p>
         </div>
     </div>
     <hr>

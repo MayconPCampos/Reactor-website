@@ -108,12 +108,3 @@ class User:
                 return self.__id
             else:
                 return False
-
-
-class Admin(User):
-
-    def __init__(self:object):
-
-        self.__id = None
-        self.__hash_password = None
-        super().__init__()
