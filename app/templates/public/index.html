@@ -6,6 +6,9 @@ Home
 
 {% block main %}
 <div class="container">
+
+
+     <!-- Primeiro link de notícia -->
     <div class="row pt-3">
         <div class="col-2 pt-1">
             <a href="/news/{{ news_list[6].title }}">
@@ -20,6 +23,9 @@ Home
         </div>
     </div>
     <hr>
+
+
+    <!-- Carousel com as duas notícias mais recentes -->
     <div class="row main-news-container">  
             <div id="news-carousel" class="carousel slide carousel-fade col-xl-9 col-lg-12 mt-1" data-bs-ride="carousel">
                 <div class="carousel-inner">
@@ -43,24 +49,30 @@ Home
                 </div>
                 </div>
               </div>
+
+
+        <!-- Quadro com os ultimos títulos adicionados -->
         <div class="col-xl-3 col-lg-12">
             <div class="containers-border mt-1">
-                <h4 class="text-center py-2">Últimas reviews</h4>
+                <h4 class="text-center py-2">Recentes</h4>
                 {% for game in game_list %}
                     <div class="row mx-2 my-1 border-bottom">
                         <div class="col-2 pt-1">
                             <button class="btn game-score">96</button>
                         </div>
                         <div class="col-10">   
-                            <a class="content-link" href="/titles/{{ game.id }}">{{ game.title[0:20] }}</a>
+                            <a class="content-link" href="/title/{{ game.id }}">{{ game.title[0:20] }}</a>
                             <p class="tiny-text">{{ game.platform[0:30] }}</p>
                         </div>
                     </div>
                 {% endfor %}
             </div>
-            <a class="content-link pt-4" href="/news">Explorar jogos >></a>
+            <a class="content-link pt-4" href="/users/account">Entre ou crie uma conta para enviar reviews</a>
         </div>   
     </div>
+
+
+    <!-- Notícias recentes -->
     <h3 class="pt-4">Notícias</h3>
     <hr>
     <div class="row">
@@ -79,7 +91,7 @@ Home
                     </div>
                 </div>
             {% endfor %}
-            <a class="content-link py-4" href="/news">Todas as notícias >></a>
+            <a class="content-link py-4" href="/news">Todas as notícias</a>
         </div>
         <div class="col-6 pt-2">
             {% for news in news_list[5:] %}
@@ -98,5 +110,7 @@ Home
             {% endfor %}
         </div>
     </div>
+
+
 </div>
 {% endblock main %}

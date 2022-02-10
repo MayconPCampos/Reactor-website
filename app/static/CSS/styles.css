@@ -1,5 +1,9 @@
 /* ------ template ------ */
 
+a {
+    text-decoration: none;
+}
+
 .bi {
     color:rgb(112, 112, 112);
 }
@@ -67,7 +71,9 @@
 .content-link-top {
     font-size: 1.6rem;
     padding-top: 1%;
+    text-decoration: none;
 }
+
 
 .explore-bar {
     background-color: rgb(13, 13, 14);
@@ -80,7 +86,6 @@
 .footer-text {
     color: white;
 }
-
 
 .search-bar {
     background-color:rgb(39, 39, 39);

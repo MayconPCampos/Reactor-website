@@ -16,7 +16,6 @@ def sign_up():
         # verifica a disponibilidade de nome e email no banco de dados
         user_in_db = user.is_registered(username, email, mysql)
         if not user_in_db:
-
             if len(password) <= 8:
                 flash("A senha precisa ter ao menos 8 caracteres.")
                 return redirect(request.url)
@@ -33,8 +32,8 @@ def sign_up():
         else:
             flash("Usuário já cadastrado.")
             return redirect(request.url)
-    else:
-        return render_template("public/new_user.html")
+    
+    return render_template("public/new_user.html")
 
 
 @app.route("/users/account", methods=["GET", "POST"])

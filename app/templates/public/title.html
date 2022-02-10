@@ -6,21 +6,37 @@
 
 {% block main %}
 <div class="container py-5">
+    
+    
     <div class="row">
+        
+        <!-- Imagem titulo -->
         <div class="col-3">
-            <img class="img-rounded w-100" src="../../static/images/game/{{ game.image }}" alt="">
+            <a href="{{ url_for('title', id=game.id) }}">
+                <img class="img-rounded w-100" src="../../static/images/game/{{ game.image }}" alt="">
+            </a>
         </div>
+
+
+        <!-- Informações sobre o título -->
         <div class="col-4">
-            <div class="content-font-top">{{ game.title }}</div>
-            <button class="btn game-score">80</button>
+            <a href="{{ url_for('title', id=game.id) }}">
+                <div class="content-font-top">{{ game.title }}</div>
+            </a>
+            <button class="btn game-score">{{ game.score }}</button>
             <div class="content-font"><strong>Plataformas disponíveis:</strong><br>{{ game.platform }}</div>
             <div class="content-font"><strong>Gênero:</strong><br>{{ game.genre }}</div>
             <div class="content-font"><strong>Lançamento:</strong><br>{{ game.release }}</div>
             <div class="content-font"><strong>Desenvolvedora:</strong><br>{{ game.developer }}</div>
             <div class="content-font"><strong>Publisher:</strong><br>{{ game.publisher}}</div>
-            <button class="btn btn-sm mt-3">Nova Review</button>
-            <button class="btn btn-sm mt-3">Enviar tempo</button>
+            {% if game %}
+                <button class="btn btn-sm mt-3" onclick="show('review');">Nova Review</button>
+                <button class="btn btn-sm mt-3" onclick="show('lenght')">Enviar tempo</button>
+            {% endif %}
         </div>
+        
+        
+        <!-- Quadro de reviews -->
         <div class="col-5">    
             <div class="review-container  containers-border">
                 <h4 class="text-center py-2">Reviews</h4>
@@ -28,16 +44,16 @@
                     {% for review in game.reviews[:4] %}
                         <div class="row border-bottom review-box">
                             <div class="col-1 pt-1">
-                                <button class="btn game-score">80</button>
+                                <button class="btn game-score">{{ review.score }}</button>
                             </div>
                             <div class="col-11">   
                                 <a class="review-username" href="">{{ review.username }}</a>
-                                <p class="review-date">{{ review.datetime }}</p>
+                                <p class="review-date">{{ review.datetime | format_date}}</p>
                                 <p class="">{{ review.text}}</p>
                             </div>
                         </div>
                     {% endfor %}
-                        <a class="content-link p-4" href="">Ver todas as reviews >></a>
+                        <a class="content-link p-4" href="{{ url_for('reviews', title_id=game.id)}}">Ver todas as reviews >></a>
                     {% else %}
                         <div class="row border-bottom review-box">
                             <p  class="text-center pt-2"><strong>Este título não possui análises até o momento.</strong></p>
@@ -45,8 +61,47 @@
                 {% endif %}
             </div>
         </div>
+
     </div>
+    
+    
+    <!-- Formulário para envio de reviews -->
+    <form id="review" class="form py-5" action="/reviews/{{ game.id }}" method="POST" style="display: none;">
+        <h5>Nova review</h5>
+        <p class="tiny-text">Insira uma nota entre 0 e 10 separados por ponto.</p>
+        <p class="tiny-text">Exemplo: 8.6</p>
+        <label>Nota</label>
+        <input class="my-2" type="text" maxlength="3" size="1" min="0" max="10" name="score">
+        <textarea class="form-control" name="review" id="" cols="60" rows="5" placeholder="Insira o texto da sua review aqui"></textarea><br>
+        <button class="btn btn-sm" type="submit">Enviar review</button>
+    </form>
+    
+    
+    <!-- Formulário para envio de tempos de jogo -->
+    <form id="lenght" class="form py-5" action="" style="display: none;">
+        <h5>Enviar tempo de jogo</h5>
+        <p class="tiny-text">Insira o tempo de jogo em horas.</p>
+        <p class="tiny-text">Exemplo: 60 = 60hrs de jogo</p>
+        <label>História principal</label>
+        <input type="text" maxlength="2" size="1" min="0">
+        <label class="ms-4">História + Dlcs</label>
+        <input type="text" maxlength="2" size="1" min="0">
+        <label class="ms-4">Multiplayer</label>
+        <input type="text" maxlength="2" size="1" min="0">
+        <label class="ms-4">100%</label>
+        <input type="text" maxlength="2" size="1" min="0"><br>
+        {% for platform in platform_list %}
+            <input type="checkbox" id="platform" name="platform" value="{{ platform }}">
+            <label for="platform">{{ platform }}</label><br>
+        {% endfor %}
+        <button class="btn btn-sm mt-4" type="submit">Enviar tempos de jogo</button>
+    </form>
+
+
 </div>
+
+
+<!-- Quadro de tempos de jogo -->
 <div class="container game-container mb-5">
     <div class="lenght-container containers-border">       
         <div class="row ps-4"> 
@@ -84,3 +139,15 @@
     </div>
 </div>
 {% endblock main %}
+
+
+{% block script %}
+
+    <!-- Script dos formulários de review e tmepo de jogo -->
+    <script>
+        function show(id) {
+            document.getElementById(id).style.display = '';
+        };
+    </script>
+
+{% endblock script %}

@@ -7,6 +7,8 @@ Notícias
 {% block main %}
 <div class="container">     
     <h3 class="pt-5 pb-4">Notícias</h2>
+
+    <!-- Lista de todas as notícias -->
     {% for news in news_list %}
         <div class="row align-items-end">
             <div class="col-2">
@@ -25,5 +27,7 @@ Notícias
         </div>
         <hr>
     {% endfor %}
+
+    
 </div>
 {% endblock main %}

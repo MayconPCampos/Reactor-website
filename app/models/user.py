@@ -37,7 +37,7 @@ class User:
             return False
 
 
-    def get_user_info(self:object, mysql:object) -> tuple:
+    def get_user(self:object, mysql:object) -> tuple:
         """Retorna todos os dados de um usuário da tabela 
         users do banco de dados
         """
@@ -50,7 +50,21 @@ class User:
         user_data = cursor.fetchone()
         return user_data
 
-    
+
+    def get_username_by_id(self:object, id:int, mysql:object) -> str:
+        """Retorna o username de um usuário da tabela 
+        users do banco de dados buscando pelo id.
+        """
+        cursor = mysql.connection.cursor()
+        cursor.execute(
+            f'''SELECT userName 
+            FROM users 
+            WHERE "{id}" =  userId'''
+        )
+        username = cursor.fetchone()
+        return username[0]
+
+
     def create_account(self:object, username:str, email:str, password:str, mysql) -> int:
         """Cria uma hash com a senha fornecida pelo usuário,
         inseri os dados do novo usuário na tabela users
@@ -76,7 +90,7 @@ class User:
         )
         mysql.connection.commit()
         
-        user_data = self.get_user_info(mysql)
+        user_data = self.get_user(mysql)
         self.__id = user_data[0]
 
         return self.__id

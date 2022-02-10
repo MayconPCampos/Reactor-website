@@ -6,6 +6,9 @@ Pesquisa
 
 {% block main %}
 <div class="container pt-3">
+
+
+    <!-- Resultados das noticias encontradas -->
     {% if news_list %}
         <h3 class="pt-4 pb-4">Notícias</h3>
         {% for news in news_list %}
@@ -27,26 +30,35 @@ Pesquisa
             <hr>
         {% endfor %}
     {% endif %}
+
+
+    <!-- Resultados dos títulos encontrados -->
     {% if game_list %}
         <h3 class="pt-2 pb-4">Games</h3>
         {% for game in game_list %}
             <div class="row py-2">
                 <div class="col-1 ">
-                    <a href="/titles/{{ game.id }}">
+                    <a href="/title/{{ game.id }}">
                         <img class="img-rounded w-100" src="../../static/images/game/{{ game.image }}" alt="">
                     </a>
                 </div>
                 <div class="col-4">
-                    <a class="content-link" href="/titles/{{ game.id }}">{{ game.title }}</a>
+                    <a class="content-link" href="/title/{{ game.id }}">{{ game.title }}</a>
                     <p class="tiny-text">{{ game.platform }}</p>        
                 </div>
             </div>
             <hr>
         {% endfor %}
     {% endif %}
+    
+    
+    <!-- Nenhum resultado encontrado imagem -->
     {% if not news_list and not game_list %}
-            <img class="ms-5 py-5" src="../../static/images/site/no-results.jpg" alt="">
+            <img class="d-block mx-auto" src="../../static/images/site/no-results.jpg" alt="">
     {% endif %}
+    
+
+    <!-- Total de resultados encontrados -->
     <h5>Resultados encontrados: {{ results }}</h5>
 </div>
 {% endblock main %}

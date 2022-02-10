@@ -1,5 +1,5 @@
 from app import app, mysql
-from app.models.news import create_news
+from app.models.news import News
 from flask import render_template, request, redirect, url_for
 import os
 
@@ -25,7 +25,8 @@ def admin_news():
             image.save(os.path.join(app.config["NEWS_IMAGES"], image.filename))
             image_filename = image.filename
 
-    create_news(label, title, sub, text, image_filename, mysql)
+    news = News()
+    news.post_news(label, title, sub, text, image_filename, mysql)
 
     return redirect(url_for('admin_contents'))
 

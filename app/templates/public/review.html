@@ -5,5 +5,38 @@ Review
 {% endblock title %}
 
 {% block main %}
-
+    <div class="container">
+        <div class="row py-5">
+            
+            <!-- Imagem titulo -->
+            <div class="col-3">
+                <a href="{{ url_for('title', id=game.id) }}">
+                    <img class="img-rounded w-100" src="../../static/images/game/{{ game.image }}" alt="">
+                </a>
+                    
+            </div>
+        
+            <!-- Reviews -->
+            <div class="col-9">
+                <a href="{{ url_for('title', id=game.id) }}">
+                    <div class="content-font-top">{{ game.title }}</div>
+                </a>
+                <div class="review-container containers-border my-2">
+                    {% for review in game.reviews %}
+                        <div class="row border-bottom review-box">
+                            <div class="col-1 pt-1">
+                                <button class="btn game-score">{{ review.score }}</button>
+                            </div>
+                            <div class="col-11">   
+                                <a class="review-username" href="">{{ review.username }}</a>
+                                <p class="review-date">{{ review.datetime | format_date}}</p>
+                                <p class="">{{ review.text}}</p>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        
+        </div>
+    </div>
 {% endblock main %}

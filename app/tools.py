@@ -1,6 +1,5 @@
 from flask import make_response, session
 from functools import wraps
-import functools
 
 
 def login_required(func):

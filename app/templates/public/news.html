@@ -7,31 +7,41 @@
 {% block main %}
 <div class="container">
     <div class="row pt-5">
-        <div class="col-8">
+        <div class="col-12">
+
+            
+            <!-- Notícia -->
             <h1>{{ page_news.title }}</h1>
             <h5>{{ page_news.sub }}</h5>
             <p class="tiny-text" >{{ page_news.date | format_date }}</p>
             <img class="img-rounded" src="../../static/images/news/{{ page_news.image }}" alt="">
             <p class="news-text py-4">{{ page_news.text }}</p>
+            
+
+            <!-- Lista de sugestões -->
             <h3>Você pode gostar</h3>
             <hr>
             {% for news in news_list[0:3] %}
                 <div class="row pb-4">
-                    <div class="col-5 pt-2">
+                    <div class="col-3 pt-2">
                         <a href="/news/{{ news.title }}">
                             <img class="img-rounded" src="../../static/images/news/{{ news.image }}" alt="">
                         </a>
                     </div>
-                    <div class="col-7 pt-2">
+                    <div class="col-9 pt-2">
                         <a class="btn btn tiny-label" href="/search/?s={{ news.label }}">{{ news.label }}</a>
                         <a class="content-link" href="">{{ news.title }}</a>
                         <p class="news-info pt-2">{{ news.sub }}</p>
                     </div>
                 </div>
             {% endfor %}
+
+            
         </div>
+
+
         <!-- espaço para adicionar anúncio e outros conteúdos-->
-        <div class="col-4">
+        <div class="col-0">
             <img class="img-rounded p-3" src="../../static/images/news/anuncio.jpg" alt="">
         </div>
     </div>
