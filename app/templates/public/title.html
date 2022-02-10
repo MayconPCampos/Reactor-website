@@ -15,6 +15,9 @@
             <a href="{{ url_for('title', id=game.id) }}">
                 <img class="img-rounded w-100" src="../../static/images/game/{{ game.image }}" alt="">
             </a>
+            {% if not session["USER_ID"] %}
+                <p class="tiny-text">Crie uma conta ou faça login para poder enviar análises ou tempos de jogos.</p>
+            {% endif %}
         </div>
 
 
@@ -29,7 +32,7 @@
             <div class="content-font"><strong>Lançamento:</strong><br>{{ game.release }}</div>
             <div class="content-font"><strong>Desenvolvedora:</strong><br>{{ game.developer }}</div>
             <div class="content-font"><strong>Publisher:</strong><br>{{ game.publisher}}</div>
-            {% if game %}
+            {% if session["USER_ID"] %}
                 <button class="btn btn-sm mt-3" onclick="show('review');">Nova Review</button>
                 <button class="btn btn-sm mt-3" onclick="show('lenght')">Enviar tempo</button>
             {% endif %}
@@ -49,7 +52,7 @@
                             <div class="col-11">   
                                 <a class="review-username" href="">{{ review.username }}</a>
                                 <p class="review-date">{{ review.datetime | format_date}}</p>
-                                <p class="">{{ review.text}}</p>
+                                <p class="">{{ review.text | format_review_text }}</p>
                             </div>
                         </div>
                     {% endfor %}

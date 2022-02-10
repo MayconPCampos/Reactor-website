@@ -13,6 +13,17 @@ def format_date(date):
     return formated
 
 
+@app.template_filter('format_review_text')
+def format_review_text(text):
+    """Recebe o texto da review e retorna uma
+    abreviação caso ela exceda 50 caracteres
+    """
+    if len(text) > 50:
+        formated = text[:50] + "..."
+        return formated
+    return text
+
+
 @app.route("/")
 def index():
 
