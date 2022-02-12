@@ -86,7 +86,7 @@ def reviews(title_id):
 
     if request.method == "POST":
         req = request.form
-        score = req.get("score")
+        score = float(req.get("score"))
         text = req.get("review")
         user_id = session["USER_ID"]
         
@@ -95,10 +95,20 @@ def reviews(title_id):
         user = User()
         username = user.get_username_by_id(user_id, mysql)
 
-        # enviando os dados da review para ser gravada
-        # no banco de dados
-        review = Review()
-        review.post_review(title_id, username, score, text, mysql)
+        # cria uma tupla para inicializar um objeto
+        # Review, os valores None são preenchidos 
+        # dentro da classe
+        review_data = (
+            None,
+            title_id,
+            score,
+            text,
+            None,
+            username
+        )
+
+        review = Review(review_data)
+        review.post_review(mysql)  # grava no banco de dados
         return redirect(request.referrer)
     
     game = Game()
@@ -131,6 +141,40 @@ def news(title):
         page_news=page_news,
         news_list=news_list
     )
+
+
+@app.route("/lenght/<int:title_id>", methods=["POST"])
+def lenght(title_id):
+
+    if request.method == "POST":
+
+        req = request.form
+        campaign = float(req.get("campaign"))
+        dlc= float(req.get("dlc"))
+        multiplayer = float(req.get("multiplayer"))
+        complete = float(req.get("complete"))
+        platform = req.get("platform")
+
+        user = User()
+        username = user.get_username_by_id(session["USER_ID"], mysql)
+
+        # cria uma tupla para inicializar um objeto
+        # Review, os valores None são preenchidos 
+        # dentro da classe
+        lenght_data = (
+            None,
+            title_id,
+            username,
+            platform,
+            campaign,
+            dlc,
+            multiplayer,
+            complete
+        )
+
+        lenght = Lenght(lenght_data)
+        lenght.post_lenght(mysql) # grava no banco de dados
+        return redirect(request.referrer)
 
 
 @app.route("/profile")

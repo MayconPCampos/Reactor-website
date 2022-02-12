@@ -81,18 +81,18 @@
     
     
     <!-- Formulário para envio de tempos de jogo -->
-    <form id="lenght" class="form py-5" action="" style="display: none;">
+    <form id="lenght" class="form py-5" action="/lenght/{{ game.id }}" method="POST" style="display: none;">
         <h5>Enviar tempo de jogo</h5>
         <p class="tiny-text">Insira o tempo de jogo em horas.</p>
         <p class="tiny-text">Exemplo: 60 = 60hrs de jogo</p>
         <label>História principal</label>
-        <input type="text" maxlength="2" size="1" min="0">
+        <input type="text" maxlength="2" size="1" min="0" name="campaign">
         <label class="ms-4">História + Dlcs</label>
-        <input type="text" maxlength="2" size="1" min="0">
+        <input type="text" maxlength="2" size="1" min="0" name="dlc">
         <label class="ms-4">Multiplayer</label>
-        <input type="text" maxlength="2" size="1" min="0">
+        <input type="text" maxlength="2" size="1" min="0" name="multiplayer">
         <label class="ms-4">100%</label>
-        <input type="text" maxlength="2" size="1" min="0"><br>
+        <input type="text" maxlength="2" size="1" min="0" name="complete"><br>
         {% for platform in platform_list %}
             <input type="checkbox" id="platform" name="platform" value="{{ platform }}">
             <label for="platform">{{ platform }}</label><br>
@@ -117,25 +117,25 @@
             <div class="col">
                 <div class= "lenght-font"><strong>História principal</strong></div>
                 {% for lenght in game.lenghts %}
-                    <p class="lenght-font pt-4 "> {{ lenght.main_history }}</p>
+                    <p class="lenght-font pt-4 "> {{ lenght.main_history }} hrs</p>
                 {% endfor %}
             </div> 
             <div class="col">
                 <div class="lenght-font"><strong>História + DLCs</strong></div>
                     {% for lenght in game.lenghts %}
-                        <p class="lenght-font pt-4">{{ lenght.dlcs }}</p>
+                        <p class="lenght-font pt-4">{{ lenght.dlcs }} hrs</p>
                     {% endfor %}
             </div>
             <div class="col">
                 <div class="lenght-font"><strong>Multiplayer</strong></div>
                     {% for lenght in game.lenghts %}
-                        <p class="lenght-font pt-4">{{ lenght.multiplayer }}</p>
+                        <p class="lenght-font pt-4">{{ lenght.multiplayer }} hrs</p>
                     {% endfor %}
             </div>
             <div class="col">
             <div class="lenght-font"><strong>100%</strong></div>
                 {% for lenght in game.lenghts %}
-                    <p class="lenght-font pt-4">{{ lenght.complete }}</p>
+                    <p class="lenght-font pt-4">{{ lenght.complete }} hrs</p>
                 {% endfor %}
             </div>
         </div>

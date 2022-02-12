@@ -96,7 +96,7 @@ class Review:
             self.datetime = review_data[4]
 
 
-    def post_review(self, title_id:int, username:str, score:float, text:str, mysql:object) -> None:
+    def post_review(self, mysql:object) -> None:
         """Grava a review de um título enviada pelo usuário
         na tabela reviews no banco de dados"""
         review_date = datetime.now()
@@ -109,10 +109,10 @@ class Review:
             reviewText,
             reviewDate)
             VALUES (
-            "{title_id}",
-            "{username}",
-            "{score}",
-            "{text}",
+            "{self.game_id}",
+            "{self.username}",
+            "{self.score}",
+            "{self.text}",
             "{review_date}");
             ''')
         mysql.connection.commit()
@@ -130,3 +130,28 @@ class Lenght:
         self.platform = lenght_data[3]
         self.multiplayer = lenght_data[6]
         self.main_history = lenght_data[4]
+
+
+    def post_lenght(self, mysql):
+        """Grava os dados de tempo de jogo de um
+        no título no banco de dados"""
+        cursor = mysql.connection.cursor()
+        cursor.execute(
+            f'''INSERT INTO lenght (
+                lenghtGameId,
+                lenghtUserId,
+                Platform,
+                mainHistory,
+                dlcs,
+                multiplayer,
+                complete)
+                VALUES (
+                    "{self.game_id}",
+                    "{self.username}",
+                    "{self.platform}",
+                    "{self.main_history}",
+                    "{self.dlcs}",
+                    "{self.multiplayer}",
+                    "{self.complete}");
+                ''')
+        mysql.connection.commit()
