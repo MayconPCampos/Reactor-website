@@ -23,6 +23,7 @@ class User:
         no banco de dados com o nome de usuário
         e email, retorna True caso os dados existam
         ou False caso não existam."""
+        
         cursor = mysql.connection.cursor()
         cursor.execute(
             f'''SELECT userName, userEmail 
@@ -41,6 +42,7 @@ class User:
         """Retorna todos os dados de um usuário da tabela 
         users do banco de dados
         """
+        
         cursor = mysql.connection.cursor()
         cursor.execute(
             f'''SELECT * 
@@ -55,6 +57,7 @@ class User:
         """Retorna o username de um usuário da tabela 
         users do banco de dados buscando pelo id.
         """
+        
         cursor = mysql.connection.cursor()
         cursor.execute(
             f'''SELECT userName 
@@ -70,6 +73,7 @@ class User:
         inseri os dados do novo usuário na tabela users
         no banco de dados, e retorna o id da nova conta
         """
+        
         self.__username = username
         self.__email = email
         self.__hash_password = generate_password_hash(password)
@@ -102,6 +106,7 @@ class User:
         e retorna o id caso a senha esteja correta, e caso
         não retorna False. Se o username não for encontrado
         na busca retorna False."""
+        
         username = username
         password = password
         cursor = mysql.connection.cursor()

@@ -21,6 +21,7 @@ class Game:
     def get_recent_game_list(self, mysql:object) -> list:
         """Retorna os dados dos seis jogos recem
         adicionados"""
+        
         cursor = mysql.connection.cursor()
         cursor.execute(
         f'''SELECT *
@@ -38,6 +39,7 @@ class Game:
     def search_games(self, search:str, mysql:object) -> list:
         """Realiza uma busca e retorna os jogos
         os quais contem a palavra procurada no titulo"""
+        
         cursor = mysql.connection.cursor()
         cursor.execute(
             f'''SELECT *
@@ -57,6 +59,7 @@ class Game:
         id do jogo na tabela reviews e lenght, instancia e
         inicializa um objeto para cada registro encontrado
         nas respectivas tabelas."""
+        
         cursor = mysql.connection.cursor()
         cursor.execute(
             f'''SELECT *
@@ -99,6 +102,7 @@ class Review:
     def post_review(self, mysql:object) -> None:
         """Grava a review de um título enviada pelo usuário
         na tabela reviews no banco de dados"""
+        
         review_date = datetime.now()
         cursor = mysql.connection.cursor()
         cursor.execute(
@@ -135,6 +139,7 @@ class Lenght:
     def post_lenght(self, mysql):
         """Grava os dados de tempo de jogo de um
         no título no banco de dados"""
+        
         cursor = mysql.connection.cursor()
         cursor.execute(
             f'''INSERT INTO lenght (

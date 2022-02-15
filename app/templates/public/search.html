@@ -9,9 +9,9 @@ Pesquisa
 
 
     <!-- Resultados das noticias encontradas -->
-    {% if news_list %}
+    {% if news_results %}
         <h3 class="pt-4 pb-4">Notícias</h3>
-        {% for news in news_list %}
+        {% for news in news_results %}
             <div class="row align-items-end">
                 <div class="col-2">
                     <a href="/news/{{ news.title }}">
@@ -31,11 +31,10 @@ Pesquisa
         {% endfor %}
     {% endif %}
 
-
     <!-- Resultados dos títulos encontrados -->
-    {% if game_list %}
+    {% if game_results %}
         <h3 class="pt-2 pb-4">Games</h3>
-        {% for game in game_list %}
+        {% for game in game_results %}
             <div class="row py-2">
                 <div class="col-1 ">
                     <a href="/title/{{ game.id }}">
@@ -53,9 +52,13 @@ Pesquisa
     
     
     <!-- Nenhum resultado encontrado imagem -->
-    {% if not news_list and not game_list %}
+    {% if not news_results and not game_results %}
             <img class="d-block mx-auto" src="../../static/images/site/no-results.jpg" alt="">
     {% endif %}
+    
+    <div>
+        {{ pagination.links }}
+    </div>
     
 
     <!-- Total de resultados encontrados -->

@@ -23,6 +23,7 @@ class News:
         tabela news, instancia e inicializa
         um objeto News para cada registro
         retornado na busca"""
+        
         cursor = mysql.connection.cursor()
         cursor.execute(f"SELECT * FROM news LIMIT {limit}")
         news_data = cursor.fetchall()
@@ -36,6 +37,7 @@ class News:
         da notícia no banco de dados e retorna
         os dados inicializando uma instancia do
         objeto News"""
+        
         cursor = mysql.connection.cursor()
         cursor.execute(
             f'''SELECT * 
@@ -52,6 +54,7 @@ class News:
         """Realiza busca no banco de dados,
         instancia e inicializa um objeto News
         para cada registro na tabela news"""
+        
         cursor = mysql.connection.cursor()
         cursor.execute("SELECT * FROM news")
         news_data = cursor.fetchall()
@@ -65,6 +68,7 @@ class News:
         através da palavra buscada, cria e
         inicializa uma instância do o objeto
         News para cada registro encontrado"""
+        
         cursor = mysql.connection.cursor()
         cursor.execute(
             f'''SELECT * 
@@ -80,15 +84,27 @@ class News:
 
     def post_news(self, label, title, sub, text, image_filename, mysql):
         """Grava os dados de uma nova notícia no banco de dados"""
+        
         admin_id = 1
         date = datetime.now()
-
         cursor = mysql.connection.cursor()
+        
         cursor.execute(
-            f'''INSERT INTO news
-            (newsLabel, newsTitle, newsSub, newsText, newsImage, newsDate, newsAdmId)
-            VALUES
-            ("{label}", "{title}", "{sub}", "{text}", "{image_filename}", "{date}", "{admin_id}");
-            '''
-            )
+            f'''INSERT INTO news (
+                newsLabel,
+                newsTitle,
+                newsSub,
+                newsText,
+                newsImage,
+                newsDate,
+                newsAdmId)
+            VALUES (
+                "{label}",
+                "{title}",
+                "{sub}",
+                "{text}",
+                "{image_filename}",
+                "{date}",
+                "{admin_id}");
+            ''')
         mysql.connection.commit()

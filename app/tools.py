@@ -8,6 +8,7 @@ def login_required(func):
     caso positivo retorna a função, caso
     negativo retorna uma página com o status
     http unauthorized"""
+    
     @wraps(func)
     def wrapper(*args, **kwargs):
         id = session.get("USER_ID")
@@ -24,6 +25,7 @@ def initialize_multiple(object, object_data):
     com dados vindos do banco de dados, instancia
     e inicializa um objeto para cada tupla na lista.
     Retorna uma lista com todos os objetos"""
+    
     obj_list = []
     for data in object_data:
         new_object = object(data)

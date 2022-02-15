@@ -4,11 +4,13 @@ from app.models.game import *
 from app.models.news import *
 from app.models.user import User
 from app import app, mysql
+from flask_paginate import Pagination, get_page_args
 
 
 @app.template_filter('format_date')
 def format_date(date):
     """Recebe e retorna a data e hora formatadas"""
+    
     formated = date.strftime("%d %b %Y às %H:%M")
     return formated
 
@@ -18,6 +20,7 @@ def format_review_text(text):
     """Recebe o texto da review e retorna uma
     abreviação caso ela exceda 50 caracteres
     """
+    
     if len(text) > 50:
         formated = text[:50] + "..."
         return formated
@@ -44,11 +47,9 @@ def search():
 
     req = request.args
     search = req.get("s")
-    results = 0
 
     game = Game()
     game_list = game.search_games(search, mysql)
-
     news = News()
     news_list = news.search_news(search, mysql)
 
@@ -59,10 +60,29 @@ def search():
     if news_list:
         results += len(news_list)
 
+    # obtem as informações de indice da página
+    page, per_page, offset = get_page_args(
+        page_parameter='page',
+        per_page_parameter='per_page'
+    )
+
+    # cria uma lista com os resultados a serem
+    # mostrados na página de acordo com o indice
+    news_results = news_list[offset: offset + per_page]
+    game_results = game_list[offset: offset + per_page]
+
+    pagination = Pagination(
+        page=page,
+        per_page=per_page,
+        total=results,
+        css_framework='bootstrap4'
+    )
+
     return render_template(
         "public/search.html", 
-        game_list=game_list,
-        news_list=news_list,
+        game_results=game_results,
+        news_results=news_results,
+        pagination=pagination,
         results=results
     )
 
@@ -124,9 +144,26 @@ def news_list():
 
     news = News()
     news_list = news.get_news(mysql)
+    results = len(news_list)
+
+    page, per_page, offset = get_page_args(
+        page_parameter="page",
+        per_page_parameter="per_page"
+    )
+
+    pagination = Pagination(
+        page=page,
+        per_page=per_page,
+        total=results,
+        css_framework='bootstrap4'
+    )
+
+    news_results = news_list[offset: offset + per_page]
+
     return render_template(
         "public/news_list.html",
-        news_list=news_list
+        news_results=news_results,
+        pagination=pagination
     )
 
 

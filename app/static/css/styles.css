@@ -87,6 +87,10 @@ a {
     color: white;
 }
 
+.page-link {
+    color: #F35836;
+}
+
 .search-bar {
     background-color:rgb(39, 39, 39);
     color: rgb(112, 112, 112) !important;
