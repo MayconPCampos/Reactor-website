@@ -1,5 +1,5 @@
 from app.tools import login_required
-from flask import render_template, request, session, redirect
+from flask import render_template, request, session, redirect, flash
 from app.models.game import *
 from app.models.news import *
 from app.models.user import User
@@ -115,21 +115,30 @@ def reviews(title_id):
         user = User()
         username = user.get_username_by_id(user_id, mysql)
 
-        # cria uma tupla para inicializar um objeto
-        # Review, os valores None são preenchidos 
-        # dentro da classe
-        review_data = (
-            None,
-            title_id,
-            score,
-            text,
-            None,
-            username
-        )
+        review = Review()
+        username_review = review.check_review_username(username, title_id, mysql)
+        
+        if not username_review:
 
-        review = Review(review_data)
-        review.post_review(mysql)  # grava no banco de dados
-        return redirect(request.referrer)
+            # cria uma tupla para inicializar um objeto
+            # Review, os valores None são preenchidos 
+            # dentro da classe
+            review_data = (
+                None,
+                title_id,
+                score,
+                text,
+                None,
+                username
+            )
+
+            review = Review(review_data)
+            review.post_review(mysql)  # grava no banco de dados
+            return redirect(request.referrer)
+        
+        else:
+            flash("Você não pode enviar mais de uma review por título.")
+            return redirect(request.referrer)
     
     game = Game()
     game.get_game_page(title_id, mysql)

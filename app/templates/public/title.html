@@ -78,6 +78,13 @@
         <textarea class="form-control" name="review" id="" cols="60" rows="5" placeholder="Insira o texto da sua review aqui"></textarea><br>
         <button class="btn btn-sm" type="submit">Enviar review</button>
     </form>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+        {% for message in messages %}
+            <p><strong>{{ message }}</strong></p>
+        {% endfor %}
+    {% endif %}
+    {% endwith %}
     
     
     <!-- Formulário para envio de tempos de jogo -->

@@ -1,3 +1,4 @@
+from unittest import result
 from app.tools import initialize_multiple
 from datetime import datetime
 
@@ -152,6 +153,22 @@ class Review:
         # chama método para atualizar média de nota do jogo
         game = Game()
         game.update_game_score(self.game_id, mysql)
+
+    def check_review_username(self, username, game_id, mysql):
+        """Verifica se já existe review de um usuário para
+        um mesmo título no banco de dados, retorna True
+        caso exista"""
+        
+        cursor = mysql.connection.cursor()
+        cursor.execute(
+            f'''SELECT reviewUsername
+            FROM review
+            WHERE reviewGameId = {game_id}''')
+        result = cursor.fetchone()[0]
+        print(result)
+        if result == username:
+            return True
+        return False
 
 
 class Lenght:
