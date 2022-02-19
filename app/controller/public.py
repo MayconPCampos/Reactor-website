@@ -210,12 +210,12 @@ def lenght(title_id):
         lenght_data = (
             None,
             title_id,
-            username,
             platform,
             campaign,
             dlc,
             multiplayer,
-            complete
+            complete,
+            username
         )
 
         lenght = Lenght(lenght_data)

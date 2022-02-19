@@ -60,7 +60,11 @@ class Game:
         a instancia com esses dados, realiza a busca usando o
         id do jogo na tabela reviews e lenght, instancia e
         inicializa um objeto para cada registro encontrado
-        nas respectivas tabelas."""
+        nas respectivas tabelas.
+        Especificamente na tabela de lenghts traz os
+        tempos de jogos com a média calculada para cada
+        plataforma e tipo de tempo de jogo
+        """
         
         cursor = mysql.connection.cursor()
         cursor.execute(
@@ -80,10 +84,17 @@ class Game:
         self.reviews = initialize_multiple(Review, review_data)
 
         cursor.execute(
-            f'''SELECT *
-            FROM lenght
-            WHERE lenghtGameId = "{self.id}";'''
-        )
+            f'''SELECT lenghtId,
+            lenghtGameId,
+            Platform,
+            round(sum(mainHistory) / count(mainHistory),1),
+            round(sum(dlcs) / count(dlcs),1),
+            round(sum(multiplayer) / count(multiplayer),1),
+            round(sum(complete) / count(complete),1),
+            lenghtUsername
+            from lenght
+            WHERE lenghtGameId = {self.id}
+            GROUP BY Platform;''')
         lenght_data = cursor.fetchall()
         self.lenghts = initialize_multiple(Lenght, lenght_data)
 
@@ -156,7 +167,7 @@ class Review:
 
     def check_review_username(self, username, game_id, mysql):
         """Verifica se já existe review de um usuário para
-        um mesmo título no banco de dados, retorna True
+        um mesmo título no banco de dados, retorna False
         caso exista"""
         
         cursor = mysql.connection.cursor()
@@ -164,11 +175,10 @@ class Review:
             f'''SELECT reviewUsername
             FROM review
             WHERE reviewGameId = {game_id}''')
-        result = cursor.fetchone()[0]
-        print(result)
+        result = cursor.fetchone()
         if result == username:
-            return True
-        return False
+            return False
+        return True
 
 
 class Lenght:
@@ -176,13 +186,13 @@ class Lenght:
     def __init__(self:object, lenght_data:tuple) -> None:
 
         self.id = lenght_data[0]
-        self.dlcs = lenght_data[5]
+        self.dlcs = lenght_data[4]
         self.game_id = lenght_data[1]
-        self.complete = lenght_data[7]
-        self.username = lenght_data[2]
-        self.platform = lenght_data[3]
-        self.multiplayer = lenght_data[6]
-        self.main_history = lenght_data[4]
+        self.complete = lenght_data[6]
+        self.username = lenght_data[7]
+        self.platform = lenght_data[2]
+        self.multiplayer = lenght_data[5]
+        self.main_history = lenght_data[3]
 
 
     def post_lenght(self, mysql):
@@ -193,7 +203,7 @@ class Lenght:
         cursor.execute(
             f'''INSERT INTO lenght (
                 lenghtGameId,
-                lenghtUserId,
+                lenghtUsername,
                 Platform,
                 mainHistory,
                 dlcs,
