@@ -16,6 +16,7 @@ class Game:
             self.platform = game_data[2]
             self.developer = game_data[4]
             self.publisher = game_data[5]
+            self.score = game_data[8]
     
 
     def get_recent_game_list(self, mysql:object) -> list:
@@ -86,6 +87,32 @@ class Game:
         self.lenghts = initialize_multiple(Lenght, lenght_data)
 
 
+    def update_game_score(self, game_id, mysql):
+        """Atualiza a média de nota de um jogo na
+        tabela game do banco de dados"""
+        
+        cursor = mysql.connection.cursor()
+        cursor.execute(
+            f'''SELECT sum(reviewScore) / count(reviewScore)
+            FROM review WHERE reviewGameId = {game_id};'''
+        )
+        average_score = cursor.fetchone()[0]
+
+        # verifica se já existe nota de review para o titulo
+        # caso não exista recebe 0
+        if average_score:
+            average_score = round(average_score, 1)
+        else:
+            average_score = 0
+
+        cursor.execute(
+            f'''UPDATE game 
+            SET gameAverageScore = {average_score}
+            WHERE gameId = {game_id};
+            ''')
+        mysql.connection.commit()
+
+
 class Review:
 
     def __init__(self:object, review_data=None) -> None:
@@ -101,8 +128,9 @@ class Review:
 
     def post_review(self, mysql:object) -> None:
         """Grava a review de um título enviada pelo usuário
-        na tabela reviews no banco de dados"""
-        
+        na tabela reviews no banco de dados e usa o método
+        que atualiza a nota do titulo de jogo"""
+
         review_date = datetime.now()
         cursor = mysql.connection.cursor()
         cursor.execute(
@@ -120,6 +148,10 @@ class Review:
             "{review_date}");
             ''')
         mysql.connection.commit()
+
+        # chama método para atualizar média de nota do jogo
+        game = Game()
+        game.update_game_score(self.game_id, mysql)
 
 
 class Lenght:
