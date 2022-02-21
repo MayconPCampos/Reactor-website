@@ -117,7 +117,8 @@ def reviews(title_id):
 
         review = Review()
         username_review = review.check_review_username(username, title_id, mysql)
-        
+        print(username_review)
+
         if not username_review:
 
             # cria uma tupla para inicializar um objeto

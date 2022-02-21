@@ -176,9 +176,11 @@ class Review:
             FROM review
             WHERE reviewGameId = {game_id}''')
         result = cursor.fetchone()
-        if result == username:
+        
+        if result == username or result == None:
+            return True
+        else:
             return False
-        return True
 
 
 class Lenght:

@@ -21,13 +21,13 @@
          <div class="top-bar-container container">
             <nav class="navbar navbar-expand-lg navbar-dark py-3">
                 <a class="brand-link" href="/">
-                    <h2 class="site-title pe-1">Nome site</h2>
+                    <h2 class="site-title pe-1">Reactor</h2>
                 </a>
                 <ul class="navbar-nav ms-auto">
                     {% if session["USER_ID"] %}
-                        <li class="nav-item pe-3">
+                        <!-- <li class="nav-item pe-3">
                             <a class="nav-link" href="/profile">Meu perfil</a>
-                        </li>
+                        </li> -->
                         <li class="nav-item">
                             <form action="/users/session" method="POST">
                                 <button class="nav-link" type="submit">Sair</button>
@@ -45,6 +45,9 @@
             </nav>
         </div>
     </div>
+    
+    
+    <!-- Menu principal -->
     <div class="explore-bar container-fluid p-0">
         <div class="explore-bar container ">
             <nav class="navbar navbar-expand-lg py-3">
@@ -73,6 +76,9 @@
     </div>
    {% block main %}
    {% endblock main %}
+        
+   
+        <!-- rodapé -->
         <footer>
             <div class="footer container-fluid">
                 <div class="container">
