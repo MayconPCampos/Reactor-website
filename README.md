@@ -3,7 +3,7 @@
 Website de notícias, análises e tempos de jogos enviados por usuários. 
 Ainda sem um nome definitivo o projeto está em fase de desenvolvimento.
 <br>
-### Resumo de algumas funcionalidades já implementadas
+### Resumo de algumas funcionalidades já implementadas:
 <hr>
 
 Página principal com as últimas notícias e últimos títulos adicionados.
