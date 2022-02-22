@@ -17,7 +17,7 @@ Página principal com as últimas notícias e últimos títulos adicionados.
 
 
 <img src="https://github.com/MayconPCampos/Website/blob/main/readme%20images/website%20(7).jpg?raw=true"/>
-Ao clicar em alguma notícia o usuário é direcionado para a página dessa notícia, onde encontra também algumas sugestões de leitura. 
+Ao clicar em alguma notícia o usuário é direcionado para a página da notícia, onde encontra também algumas sugestões de leitura. 
 <br>
 <br>
 <br>
