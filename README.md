@@ -41,7 +41,7 @@ Os formulários para envio são acessados na mesma página atrávez das opções
 
 
 <img src="https://github.com/MayconPCampos/Website/blob/main/readme%20images/website%20(2).jpg?raw=true"/>
-Na página de resultados o usuário encontra as notícias e títulos relacionados com a busca, como o banco de dados já conta com uma quantidade considerável de títulos com uso de paginação são exibir 10 resultados por vez.
+Na página de resultados o usuário encontra as notícias e títulos relacionados com a busca, como o banco de dados já conta com uma quantidade considerável de títulos com uso de paginação são exibidos 10 resultados por vez.
 <br>
 <br>
 <br>
