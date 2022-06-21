@@ -1,9 +1,8 @@
 ## Reactor Website.
 
-Website de notícias, análises e tempos de jogos enviados por usuários. 
-Ainda sem um nome definitivo o projeto está em fase de desenvolvimento.
+Website de notícias, tempos de jogos e análises enviadas por usuários.
 <br>
-### Resumo de algumas funcionalidades já implementadas:
+### Resumo:
 
 
 
