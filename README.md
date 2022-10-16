@@ -38,7 +38,7 @@ A página de cada título traz informações sobre o jogo, a sua média de nota 
 
 
 <img src="https://github.com/MayconPCampos/Website/blob/main/readme%20images/website%20(6).jpg?raw=true"/>
-Os formulários para envio são acessados na mesma página atrávez das opções ``Nova Review`` e ``Enviar tempo`` apenas usuários com conta e conectados no site podem enviar análises e tempos de jogos.
+Os formulários para envio são acessados na mesma página atrávez das opções Nova Review e Enviar tempo apenas usuários com conta e conectados no site podem enviar análises e tempos de jogos.
 <br>
 <br>
 <br>
