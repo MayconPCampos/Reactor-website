@@ -6,7 +6,7 @@ Este projeto foi criado para demonstrar os conhecimentos adquiridos de programa�
 
 O site foi construído com ``Python`` usando o framework ``Flask``, todas as funcionalidades e páginas foram criadas do zero incluindo a funcionaliade de criação de contas e toda a comunicação com o banco de dados criado com uso do ``MySQL``.
 
-O front-end foi desenvolvido também do zero com ``html``, ``css`` e uso do framework ``bootstrap``.
+O restante foi desenvolvido com ``html``, ``css`` e uso do framework ``bootstrap``.
 <br>
 ### Resumo:
 
