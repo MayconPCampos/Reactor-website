@@ -1,12 +1,10 @@
-## Website completo sobre jogos.
+## Website com Flask.
 
-Website com notícias, duração de jogos e análises enviadas por usuários com uma área de administrador para inserção do conteúdo nas páginas.
+Website com notícias, informações de títulos e análises enviadas por usuários com uma área de administrador para edição do conteúdo no site.
 
-Este projeto foi criado para demonstrar os conhecimentos adquiridos de programação ``back-end``.
+Desenvolvido com ``Python`` e o framework ``Flask``, comunicação com banco de dados usando ``MySQL``.
 
-O site foi construído com ``Python`` usando o framework ``Flask``, todas as funcionalidades e páginas foram criadas do zero incluindo a funcionaliade de criação de contas e toda a comunicação com o banco de dados com uso do ``MySQL``.
-
-``html``, ``css`` e ``bootstrap`` para criar o visual das páginas.
+``html``, ``css`` e ``bootstrap`` na criação das páginas.
 <br>
 ### Resumo:
 
