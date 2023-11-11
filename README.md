@@ -6,18 +6,19 @@ Desenvolvido com ``Python`` e o framework ``Flask``, comunicação com banco de 
 
 ``html``, ``css`` e ``bootstrap`` na criação das páginas.
 <br>
-### Resumo:
+
 
 
 
 
 <img src="https://github.com/MayconPCampos/Website/blob/main/readme%20images/website%20(3).jpg?raw=true"/>
+
+<!--
 Página principal com as últimas notícias e últimos títulos adicionados.
 <br>
 <br>
 <br>
 <br>
-
 
 <img src="https://github.com/MayconPCampos/Website/blob/main/readme%20images/website%20(7).jpg?raw=true"/>
 Ao clicar em alguma notícia o usuário é direcionado para a página da notícia, onde encontra também algumas sugestões de leitura. 
@@ -53,3 +54,4 @@ Na página de resultados o usuário encontra as notícias e títulos relacionado
 
 <img src="https://github.com/MayconPCampos/Website/blob/main/readme%20images/website%20(5).jpg?raw=true"/>
 Área de criação de contas e login.
+-->
